@@ -1,0 +1,32 @@
+{% extends 'posts/base.html' %}
+
+{% block titulo %}Publicaciones | Mi Blog{% endblock %}
+
+{% block contenido %}
+<section class="seccion">
+    <h1 class="seccion-titulo">Publicaciones</h1>
+    <p class="seccion-intro">Lo último que escribí, de la más reciente a la más antigua.</p>
+
+    <div class="lista-posts">
+        {% for post in posts %}
+        <article class="post">
+            <time class="post-fecha" datetime="{{ post.fecha_creacion|date:'c' }}">
+                <span class="post-dia">{{ post.fecha_creacion|date:"d" }}</span>
+                <span class="post-mes">{{ post.fecha_creacion|date:"M Y" }}</span>
+            </time>
+
+            <div class="post-cuerpo">
+                <h2 class="post-titulo">{{ post.titulo }}</h2>
+                <p class="post-meta">Por {{ post.autor }}</p>
+                <div class="post-contenido">{{ post.contenido|linebreaks }}</div>
+            </div>
+        </article>
+        {% empty %}
+        <div class="vacio">
+            <h2>Todavía no hay publicaciones</h2>
+            <p>Entrá al <a href="/admin/">panel de administración</a>, creá un post y cambiá su estado a «Publicado» para verlo acá.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

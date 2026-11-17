@@ -3,26 +3,40 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mi Blog{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}Mi Blog{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'posts/css/estilos.css' %}">
 </head>
 <body>
-    <header class="encabezado">
-        <h1 class="logo">Mi Blog</h1>
-        <nav class="menu">
-            <a href="{% url 'posts:inicio' %}">Inicio</a>
-            <a href="{% url 'posts:acerca' %}">Acerca de</a>
-        </nav>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <header class="cabecera">
+        <div class="cabecera-interior">
+            <a class="marca" href="{% url 'posts:inicio' %}">Mi Blog</a>
+            <nav class="menu" aria-label="Principal">
+                <a href="{% url 'posts:inicio' %}"
+                   {% if request.resolver_match.url_name == 'inicio' %}aria-current="page"{% endif %}>Inicio</a>
+                <a href="{% url 'posts:lista_posts' %}"
+                   {% if request.resolver_match.url_name == 'lista_posts' %}aria-current="page"{% endif %}>Publicaciones</a>
+                <a href="{% url 'posts:acerca' %}"
+                   {% if request.resolver_match.url_name == 'acerca' %}aria-current="page"{% endif %}>Acerca de</a>
+            </nav>
+        </div>
     </header>
 
-    <main class="contenedor">
-        {% block content %}
-        {% endblock %}
+    <main id="contenido" class="contenedor">
+        {% block contenido %}{% endblock %}
     </main>
 
     <footer class="pie">
-        <p>&copy; 2026 Mi Blog. Todos los derechos reservados.</p>
+        <div class="pie-interior">
+            <p>Mi Blog · Proyecto Django, Módulo 7</p>
+        </div>
     </footer>
 </body>
 </html>

@@ -1,23 +1,32 @@
 {% extends 'posts/base.html' %}
 
-{% block title %}Acerca de | Mi Blog{% endblock %}
+{% block titulo %}Acerca de | Mi Blog{% endblock %}
 
-{% block content %}
+{% block contenido %}
 <section class="seccion">
-    <h2>Acerca del autor</h2>
-    <p>
-        Soy un estudiante de programación apasionado por el desarrollo web.
-        Actualmente estoy aprendiendo Python y Django, y este blog es parte
-        de ese camino.
-    </p>
-</section>
+    <h1 class="seccion-titulo">Acerca de</h1>
 
-<section class="seccion">
-    <h2>Propósito del sitio</h2>
-    <p>
-        El objetivo de este sitio es compartir contenido de forma simple y
-        ordenada, y practicar la creación de aplicaciones web con Django,
-        usando templates, herencia, rutas y archivos estáticos.
-    </p>
+    <div class="acerca">
+        <div class="acerca-autor">
+            <div class="avatar" aria-hidden="true">T</div>
+            <p class="acerca-nombre">[Tu nombre]</p>
+            <p class="acerca-rol">Estudiante de desarrollo web</p>
+        </div>
+
+        <div class="acerca-texto">
+            <h2>Quién escribe</h2>
+            <p>
+                [Escribí acá una breve reseña tuya: qué estudiás, qué te gusta
+                y qué experiencia tenés con la programación.]
+            </p>
+
+            <h2>Para qué existe este sitio</h2>
+            <p>
+                Este blog nació como parte del Módulo 7 del curso. Sirve para
+                practicar Django (plantillas, rutas, modelos y panel de
+                administración) y para dejar por escrito lo que voy aprendiendo.
+            </p>
+        </div>
+    </div>
 </section>
 {% endblock %}
