@@ -120,3 +120,47 @@ git add .
 git commit -m "Checkpoint: Modelos y Admin configurados"
 git push
 ```
+## Módulo 10: CRUD de posts con imágenes
+
+### Cómo ejecutar el proyecto
+
+```shell
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Luego abrir http://127.0.0.1:8000/
+
+### Operaciones CRUD disponibles
+
+| Operación | Ruta |
+|-----------|------|
+| Listar posts publicados | `/posts/` |
+| Ver detalle | `/posts/<id>/` |
+| Crear | `/posts/crear/` |
+| Editar | `/posts/<id>/editar/` |
+| Eliminar (con confirmación) | `/posts/<id>/eliminar/` |
+
+### Manejo de imágenes
+
+- El modelo `Post` tiene un campo `imagen = models.ImageField(upload_to='posts/', null=True, blank=True)`, por lo que la imagen es opcional.
+- En `settings.py` se configuraron `MEDIA_URL = '/media/'` y `MEDIA_ROOT = BASE_DIR / 'media'`.
+- En `urls.py` del proyecto se sirven los archivos media durante el desarrollo (`DEBUG = True`) con `static()`.
+- Las vistas de crear y editar procesan los archivos con `PostForm(request.POST, request.FILES)`.
+- El formulario (`post_form.html`) usa `enctype="multipart/form-data"`.
+- Los templates muestran la imagen solo si existe (`{% if post.imagen %}`), así que un post sin imagen no rompe la página.
+- Las imágenes subidas se guardan en la carpeta `media/posts/`.
+
+### Dependencia nueva
+
+- **Pillow**: necesaria para usar `ImageField`. Se instala con `pip install Pillow` y quedó registrada en `requirements.txt`.
+
+### Cómo probar la carga de imágenes
+
+1. Ir a `/posts/crear/`.
+2. Completar título, contenido, autor y estado (elegir «Publicado» para que aparezca en el listado).
+3. Seleccionar un archivo de imagen en el campo «Imagen» y guardar.
+4. Verificar que la imagen se vea en el detalle y en el listado.
+5. Entrar a «Editar» y cambiar la imagen para comprobar que se actualiza.
+6. Revisar que el archivo exista dentro de `media/posts/`.

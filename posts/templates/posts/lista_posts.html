@@ -7,6 +7,8 @@
     <h1 class="seccion-titulo">Publicaciones</h1>
     <p class="seccion-intro">Lo último que escribí, de la más reciente a la más antigua.</p>
 
+    <p><a class="boton" href="{% url 'posts:crear_post' %}">+ Nueva publicación</a></p>
+
     <div class="lista-posts">
         {% for post in posts %}
         <article class="post">
@@ -16,15 +18,28 @@
             </time>
 
             <div class="post-cuerpo">
-                <h2 class="post-titulo">{{ post.titulo }}</h2>
+                <h2 class="post-titulo">
+                    <a href="{% url 'posts:detalle_post' post.pk %}">{{ post.titulo }}</a>
+                </h2>
                 <p class="post-meta">Por {{ post.autor }}</p>
-                <div class="post-contenido">{{ post.contenido|linebreaks }}</div>
+
+                {% if post.imagen %}
+                <img class="post-imagen" src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+                {% endif %}
+
+                <div class="post-contenido">{{ post.contenido|linebreaks|truncatewords_html:40 }}</div>
+
+                <p class="post-acciones">
+                    <a href="{% url 'posts:detalle_post' post.pk %}">Ver</a> ·
+                    <a href="{% url 'posts:editar_post' post.pk %}">Editar</a> ·
+                    <a href="{% url 'posts:eliminar_post' post.pk %}">Eliminar</a>
+                </p>
             </div>
         </article>
         {% empty %}
         <div class="vacio">
             <h2>Todavía no hay publicaciones</h2>
-            <p>Entrá al <a href="/admin/">panel de administración</a>, creá un post y cambiá su estado a «Publicado» para verlo acá.</p>
+            <p><a href="{% url 'posts:crear_post' %}">Creá una publicación</a> y cambiá su estado a «Publicado» para verla acá.</p>
         </div>
         {% endfor %}
     </div>

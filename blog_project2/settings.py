@@ -123,3 +123,6 @@ STATIC_URL = 'static/'
 
 # Email (los correos se imprimen en la consola durante el desarrollo)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Archivos media (imágenes subidas por los usuarios)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

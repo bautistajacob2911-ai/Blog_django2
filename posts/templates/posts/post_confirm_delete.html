@@ -1,0 +1,16 @@
+{% extends 'posts/base.html' %}
+
+{% block titulo %}Eliminar publicación | Mi Blog{% endblock %}
+
+{% block contenido %}
+<section class="seccion">
+    <h1 class="seccion-titulo">Eliminar publicación</h1>
+    <p>¿Seguro que querés eliminar «<strong>{{ post.titulo }}</strong>»? Esta acción no se puede deshacer.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="boton">Sí, eliminar</button>
+        <a href="{% url 'posts:detalle_post' post.pk %}">Cancelar</a>
+    </form>
+</section>
+{% endblock %}

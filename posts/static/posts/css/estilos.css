@@ -411,3 +411,24 @@ a:hover {
         transition: none;
     }
 }
+.post-imagen {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.boton {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid currentColor;
+    border-radius: 6px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.post-acciones { margin-top: 1rem; }
+.formulario p { margin-bottom: 1rem; }
